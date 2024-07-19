@@ -1,21 +1,39 @@
 import React, { useState } from "react";
+import "../data.json";
+import "./ProductCard.css";
+import cartSVG from "../../assets/images/icon-add-to-cart.svg";
 
-const ProductCard = (props) => {
+interface ProductCardProps {
+  name: string;
+  price: number;
+  category: string;
+  image: string;
+  index: number;
+}
+const ProductCard: React.FC<ProductCardProps> = ({
+  name,
+  price,
+  category,
+  image,
+  index,
+}) => {
   const [count, setCount] = useState(0);
   return (
     <div className="product-card">
-      <div>
-        <img src={props.img} alt={props.title} key={props.index} />
-        <div>
-          <img src={props.cart} key={props.index} alt={props.title} />
-          <h6>Add to Cart</h6>
+      <div className="product-image-div">
+        <img className="product-images" src={image} alt={name} key={index} />
+        <div className="button-div">
+          <button className="product-button">
+            <img src={cartSVG} className="product-cart" />
+            <h6 className="add-to-cart">Add to Cart</h6>
+          </button>
         </div>
       </div>
-      <div className="product-info">
-        <p className="product-category">{}</p>
-        <h6 className="product-name">{}</h6>
-        <h6 className="product-price">{}</h6>
-      </div>
+      {/*<div className="product-info">*/}
+      <h6 className="product-category">{category}</h6>
+      <h6 className="product-name">{name}</h6>
+      <h6 className="product-price">{`$ ${price.toFixed(2)}`}</h6>
+      {/*</div>*/}
     </div>
   );
 };
